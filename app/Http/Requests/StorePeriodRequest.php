@@ -3,7 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use illuminate\Validation\rules;
+use Illuminate\Validation\rules;
+
 class StorePeriodRequest extends FormRequest
 {
     /**
@@ -22,12 +23,15 @@ class StorePeriodRequest extends FormRequest
     public function rules(): array
     {
         return [
-        //
-            'short_name'=>['required'],
-            'long_name'=>['required'],
-            'start_date'=>['required','date'],
-            'final_date'=>['required','date'],
-            'status'=>['required'],
+        // 
+            'short_name' => ['required'],
+            'long_name' => ['required'],
+            'start_date' => ['required', 'date'],
+            'final_date' => ['required', 'date'],
+            'status' => ['required'],
         ];
+    }
+    
+    protected function PreparateforValidation(){
     }
 }

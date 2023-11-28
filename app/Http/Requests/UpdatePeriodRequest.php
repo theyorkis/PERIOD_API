@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdatePeriodRequest extends FormRequest
 {
@@ -21,27 +22,27 @@ class UpdatePeriodRequest extends FormRequest
      */
     public function rules(): array
     {
-        $method =$this->method() ;
-            if ($method=='PUT'){
-                return [
-                    //
-                    'short_name'=>['required'],
-                    'long_name'=>['required'],
-                    'start_date'=>['required','date'],
-                    'final_date'=>['required','date'],
-                    'status'=>['required'],
-                ];
-            }else{
-                return[
-                    'short_name'=>['sometime'],
-                    'long_name'=>['sometime'],
-                    'start_date'=>['sometime','date'],
-                    'final_date'=>['sometime','date'],
-                    'status'=>['sometime'],
-                ];
+       $method = $this ->method();
+       if($method == 'PUT'){
+            return [
+                //
+                'short_name'=>['required'],
+                'long_name'=>['required'],
+                'start_date'=>['required','date'],
+                'final_date'=>['required','date'],
+                'status'=>['required'],
+        
+            ];
+       }else{
+        return [
+            //
+            'short_name'=>['sometimes','required'],
+            'long_name'=>['sometimes','required'],
+            'start_date'=>['sometimes','required'],
+            'final_date'=>['sometimes','required'],
+            'status'=>['sometimes','required'],
             
-            } 
+        ];
+       }
     }
 }
-       
-

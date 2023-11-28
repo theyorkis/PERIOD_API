@@ -13,10 +13,10 @@ use App\Http\Resources\periodResource;
 class PeriodController extends Controller
 {
     public function index(Request $request){
-        $Filters= new PeriodFilters();
-        $QueryItems = $Filters ->transform($request);
+        $filter= new PeriodFilters();
+        $QueryItems = $filter ->transform($request);
         $Period = Period::where($QueryItems);
-        return new periodColletion($Period->paginate()->append($request->query()));
+        return new periodColletion($Period->paginate()->appends($request->query()));
     
     }
 
@@ -32,6 +32,7 @@ class PeriodController extends Controller
 
     public function show(Period $period)
     {
+      
         return new periodResource($period);
     //
     }
@@ -50,5 +51,8 @@ class PeriodController extends Controller
     public function destroy(Period $period)
     {
     //
+    $period->delete();
+
+        return response()->json(['message' => 'Registro eliminado exitosamente']);
     }
 }
